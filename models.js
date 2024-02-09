@@ -4,4 +4,8 @@ export class Task {
       this.description = description;
       this.status = status;
     }
+
+    ToString() {
+        return `Задача с id: ${this.id} описание: ${this.description}' статус: ${this.status}`;
+    }
 }

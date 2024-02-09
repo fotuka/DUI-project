@@ -13,8 +13,8 @@ function PrintTasks()
 {
     tasks.forEach((element) => {
         if(element.status === false)
-            console.log(chalk.red(element.description))
+            console.log(chalk.red(element.ToString()))
         else
-            console.log(chalk.green(element.description))
+            console.log(chalk.green(element.ToString()))
     });
 }
