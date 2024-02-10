@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import { TaskManager } from "./task-manager.js";
-
 import { Task } from "./models.js";
 
 function print(tasks) {
