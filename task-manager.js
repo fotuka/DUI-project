@@ -1,9 +1,12 @@
 import { readFileSync, writeFileSync } from "fs";
 import { Task } from "./models.js";
+import { EventEmitter } from 'events';
 
-export class TaskManager {
+export class TaskManager extends EventEmitter {
   tasks = [];
+  myEmitter = new EventEmitter();
   constructor(jsonPath) {
+    super();
     this.jsonPath = jsonPath;
     this.load();
   }
@@ -29,9 +32,11 @@ export class TaskManager {
 
   add(task) {
     this.tasks.push(task);
+    this.myEmitter.emit('taskAdded', task);
   }
 
   remove(taskid) {
     this.tasks = this.tasks.filter((task) => task.id !== taskid);
+    this.myEmitter.emit('taskRemoved', taskid);
   }
 }

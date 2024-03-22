@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import { TaskManager } from "./task-manager.js";
 import { Task } from "./models.js";
+import { EventEmitter } from 'events';
 
 function print(tasks) {
   if (tasks.length > 0)
@@ -11,9 +12,15 @@ function print(tasks) {
   else console.log("Нет задач");
 }
 
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on('taskAdded', Task => {
+    console.log(`AddedTask ${Task.description}`);
+});
 const taskManager = new TaskManager("./tasks.json");
 console.log("задачи из файла");
 print(taskManager.tasks);
+
 taskManager.save();
 
 console.log("добавили задачку");
