@@ -20,7 +20,12 @@ export class TaskManager extends EventEmitter {
   load() {
     try {
       const data = readFileSync(this.jsonPath, "utf8");
-      this.tasks = this.#transformToTask(JSON.parse(data));
+      this.tasks = JSON.parse(data).map(task => {
+        const newTask = new TaskModel(task);
+        newTask.save();
+        return newTask;
+    })
+  
     } catch (err) {
       console.log(err);
     }
